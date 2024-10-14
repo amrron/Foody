@@ -4,11 +4,12 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Illuminate\Support\Carbon;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -23,8 +24,22 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'aktivitas',
+        'role',
+        'gambar'
     ];
+
+    public function bmi() {
+        return $this->hasMany(Bmi::class);
+    }
+
+    public function foodRecords() {
+        return $this->hasMany(FoodRecord::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,5 +62,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    
+    public function getTinggiBadanAttribute() {
+        return $this->bmi->last()->tinggi_badan;
+    }
+
+    public function getBeratBadanAttribute() {
+        return $this->bmi->last()->berat_badan;
+    }
+
+    public function getUsiaAttribute(){
+        return Carbon::parse($this->tanggal_lahir)->age;
     }
 }

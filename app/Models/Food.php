@@ -9,4 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model
 {
     use HasFactory, HasUuids;
+
+    protected $guarded = [
+        'id'
+    ];
+
+    public function foodRecords() {
+        return $this->hasMany(FoodRecord::class);
+    }
 }

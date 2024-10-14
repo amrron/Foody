@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('food_records', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id');
-            $table->foreignUuid('makanan_id')->nullable();
             $table->float('protein');
             $table->float('karbohidrat');
             $table->float('garam');
