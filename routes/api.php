@@ -2,15 +2,10 @@
 
 use App\Http\Controllers\BmiController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodRecordController;
 use App\Http\Controllers\UserController;
-use App\Models\Bmi;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
 
 Route::prefix('v1')->group(function(){
     // Route untuk user yang sudah login dan email terverifikasi
@@ -28,6 +23,16 @@ Route::prefix('v1')->group(function(){
 
         Route::controller(FoodRecordController::class)->group(function(){
             Route::post('/catatanku', 'store');
+            Route::get('/catatanku/daily', 'daily');
+            Route::get('/catatanku/history', 'history');
+            Route::get('/catatanku/{tanggal}', 'tanggal');
+            Route::delete('/catatanku/{foodRecord}', 'destroy');
+        });
+
+        Route::controller(FoodController::class)->group(function(){
+            Route::get('/makanan', 'index');
+            Route::get('/makanan/{food}', 'show');
+            Route::post('/makanan/create', 'create');
         });
     });
 

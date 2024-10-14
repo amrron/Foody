@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class FoodRecord extends Model
 {
@@ -16,5 +17,10 @@ class FoodRecord extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function getTanggalWaktuAttribute()
+    {
+        return Carbon::parse($this->waktu)->format('Y/m/d');
     }
 }
