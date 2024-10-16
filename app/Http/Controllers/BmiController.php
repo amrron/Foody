@@ -15,6 +15,19 @@ class BmiController extends Controller
         $validatedBmi = $request->validated();
         $validatedBmi['user_id'] = auth()->id();
 
+        $user = auth()->user();
+
+        $bmis = Bmi::where('user_id', $user->id)->whereDate('created_at', now())->count();
+        
+        if ($bmis > 0 && !$user->langganan) {
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'error' => 'Gagal menghitung BMI',
+                'message' => 'Fitur BMI hanya bisa digunakan sekali dalam sehari untuk pengguna non premium.'
+            ], 401);
+        }
+
         try {
             DB::beginTransaction();
             

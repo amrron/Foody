@@ -16,6 +16,18 @@ class FoodRecordController extends Controller
         $validatedFoodRecord['user_id'] = auth()->id();
         $validatedFoodRecord['waktu'] = Carbon::now()->toDateString() . ' ' . $validatedFoodRecord['waktu'];
 
+        $user = auth()->user();
+        $foods = FoodRecord::where('user_id', $user->id)->whereDate('created_at', now())->count();
+
+        if ($foods > 1 && !$user->langganan) {
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'error' => 'Gagal membuat catatan makanan',
+                'message' => 'Fitur catatan makanan hanya bisa digunakan dua kali dalam sehari untuk pengguna non premium.'
+            ], 401);
+        }
+
         try {
             DB::beginTransaction();
 

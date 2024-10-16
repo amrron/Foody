@@ -26,6 +26,18 @@ class FoodController extends Controller
     }
 
     public function create(GenerateFoodRequest $request) {
+
+        $user = auth()->user();
+
+        if (!$user->langganan) {
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'error' => 'Gagal membuat data makanan',
+                'message' => 'Fitur ini khusus pengguna premium'
+            ], 401);
+        }
+
         $validatedRequest = $request->validated();
 
         $compilation = $this->generate($request->makanan, $request->detail ?? '');

@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('va_number')->nullable(); // Nomor Virtual Account (untuk bank transfer)
             $table->string('bank')->nullable(); // Nama bank yang digunakan
             $table->string('fraud_status')->nullable(); // Fraud status
-            $table->timestamp('subcription_start');
-            $table->timestamp('subcription_end');
+            $table->timestamp('subscription_start')->nullable();
+            $table->timestamp('subscription_end')->nullable();
             $table->timestamps();
         });
     }

@@ -214,4 +214,8 @@ class User extends Authenticatable
 
         return $keterangan[$this->aktivitas];
     }
+
+    public function getLanggananAttribute(){
+        return $this->is_premium && $this->premium_until > now();
+    }
 }

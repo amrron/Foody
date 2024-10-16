@@ -23,8 +23,11 @@ class UserResource extends JsonResource
             "berat_badan" => $this->berat_badan,
             "tanggla_lahir" => $this->tanggal_lahir,
             "tinggi_badan" => $this->tinggi_badan,
-            "gambar" => $this->gambar ? asset('/storage') . '/' . $this->gambar : null,
-            "verified" => $this->hasVerifiedEmail()
+            "gambar" => $this->gambar ? asset('storage/' . $this->gambar) : null,
+            "verified" => $this->hasVerifiedEmail(),
+            "premium" => $this->premium,
+            "premium_until" => $this->premium_until,
+            "langganan" => $this->langganan
         ];
     }
 }

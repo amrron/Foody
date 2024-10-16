@@ -4,6 +4,7 @@ use App\Http\Controllers\BmiController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodRecordController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,13 @@ Route::prefix('v1')->group(function(){
             Route::get('/makanan', 'index');
             Route::get('/makanan/{food}', 'show');
             Route::post('/makanan/create', 'create');
+        });
+
+        Route::controller(TransactionController::class)->group(function(){
+            Route::post('/transaksi', 'store');
+            // Route::get('/transaction', 'index');
+            // Route::get('/transaction/{transaction}', 'show');
+            // Route::delete('/transaction/{transaction}', 'destroy');
         });
     });
 
