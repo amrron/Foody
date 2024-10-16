@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\UserUpdateRequest;
-use App\Http\Resources\UserResource;
 use App\Models\Bmi;
 use App\Models\User;
-use App\Notifications\EmailVerificationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\SummaryResource;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UpdateProfileImageRequest;
+use App\Notifications\EmailVerificationNotification;
 
 class UserController extends Controller
 {
@@ -74,12 +77,14 @@ class UserController extends Controller
         
     }
 
-    public function logout() : JsonResponse{
+    public function logout() {
         auth()->user()->tokens()->delete();
 
         return response()->json([
-            "message" => "Logout berhasil"
-        ], 201);
+            'success' => true,
+            'status' => 'success',
+            'message' => 'Logout berhasil',
+        ], 200);
     }
 
     public function profile() {
@@ -142,5 +147,96 @@ class UserController extends Controller
             ], 500);
         }
         
+    }
+
+    public function summary() {
+        try {
+            $user = auth()->user();
+
+            return response()->json([
+                'success' => true,
+                'status' => 'success',
+                'message' => 'Berhasil mendapatkan data user',
+                'data' => new SummaryResource($user),
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'message' => 'Gagal mendapatkan data user',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
+    public function updateImage(UpdateProfileImageRequest $request) {
+        $validatedImages = $request->validated();
+
+        $user = auth()->user();
+
+        try {
+            DB::beginTransaction();
+
+            if ($request->file('gambar')) {
+                if ($user->gambar && Storage::disk('public')->exists($user->gambar)) {
+                    Storage::disk('public')->delete($user->gambar);
+                }
+
+                $user->gambar = $request->file('gambar')->store('profile', 'public');
+                $user->save();
+
+                DB::commit();
+            }
+
+            return response()->json([
+                'success' => true,
+                'status' => 'success',
+                'message' => 'Berhasil mengupdate gambar',
+                'data' => new UserResource($user)
+            ], 201);
+
+        } catch (\Throwable $th) {
+            DB::rollBack(); 
+
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'message' => 'Gagal mengupdate gambar',
+                'error' => $th->getMessage()
+            ], 400);
+        }
+    }
+
+    public function removeImage() {
+        $user = auth()->user();
+
+        try {
+            DB::beginTransaction();
+
+            if ($user->gambar && Storage::disk('public')->exists($user->gambar)) {
+                Storage::disk('public')->delete($user->gambar);
+                $user->gambar = null;
+                $user->save();
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'status' => 'success',
+                'message' => 'Berhasil menghapus gambar',
+                'data' => new UserResource($user)
+            ]);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'message' => 'Gagal menghapus gambar',
+                'error' => $th->getMessage()
+            ], 501);
+        }
     }
 }

@@ -12,12 +12,16 @@ Route::prefix('v1')->group(function(){
     Route::middleware(['auth:sanctum', 'email_verified'])->group(function(){
         Route::controller(UserController::class)->group(function(){
             Route::put('/user', 'update');
+            Route::post('/user/image', 'updateImage');
+            Route::get('/user/summary', 'summary');
+            Route::delete('/user/image', 'removeImage');
         });
 
         Route::controller(BmiController::class)->group(function(){
             Route::post('/bmi', 'store');
             Route::get('/bmi/recent', 'recent');
             Route::get('/bmi/history', 'history');
+            Route::get('/bmi/chart', 'apichart');
             Route::delete('/bmi/{bmi}', 'destroy');
         });
 
