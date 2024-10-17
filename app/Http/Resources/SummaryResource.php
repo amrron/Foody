@@ -32,7 +32,8 @@ class SummaryResource extends JsonResource
             'daily_garam' => $this->dailyGaram,
             'daily_gula' => $this->dailyGula,
             'daily_lemak' => $this->dailyLemak,
-            'kebutuhan_kalori' => $this->kebutuhanKalori
+            'kebutuhan_kalori' => $this->kebutuhanKalori,
+            'progres_kalori' => $this->progresKalori
         ];
     }
 }

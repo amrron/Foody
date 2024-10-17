@@ -4,6 +4,7 @@ use App\Http\Controllers\BmiController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodRecordController;
+use App\Http\Controllers\MidtransNotificationController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -70,5 +71,5 @@ Route::prefix('v1')->group(function(){
         Route::post('/user/login', [UserController::class, 'login']);
     });
 
-    
+    Route::post('/midtrans/notif-hook', MidtransNotificationController::class);
 });

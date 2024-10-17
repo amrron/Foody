@@ -140,6 +140,12 @@ class User extends Authenticatable
         return round($kebutuhankalori, 2);
     }
 
+    public function getProgresKaloriAttribute() {
+        // Total kalori = (gram karbohidrat × 4) + (gram protein × 4) + (gram lemak × 9)
+        $totalKalori = ($this->dailyKarbohidrat * 4) + ($this->dailyProtein * 4) + ($this->dailyLemak * 9);
+        return $totalKalori;
+    }
+
     public function getBatasKarbohidratAttribute() {
         // Jika 55% kebutuahan kalori berasal dari karbodirat, 1 gram karbohidart 4 kalori
         return round($this->kebutuhanKalori * 0.55 / 4);

@@ -49,16 +49,20 @@ class MidtransNotificationController extends Controller
         if ($transaction_status == 'settlement') {
             $transaction->status = $transaction_status;
             $transaction->subscription_start = now()->timestamp;
-            $transaction->subscription_end = now()->addDays($subscriptionDay)->timestamp();
+            $transaction->subscription_end = now()->addDays($subscriptionDay)->timestamp;
             $transaction->payment_method = $payload['payment_type'];
             $transaction->transaction_time = $payload['transaction_time'];
             $transaction->transaction_time = $payload['transaction_time'];
             $transaction->save();
 
-            $user->premium_until = 
+            $user->premium_until = now()->addDays($subscriptionDay)->timestamp;
         }
 
-
+        return response()->json([
+            'success' => true,
+            'status' => 'success',
+            'message' => 'success'
+        ]);
 
     }
 }
