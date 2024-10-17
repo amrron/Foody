@@ -4,6 +4,7 @@ use App\Http\Controllers\BmiController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodRecordController;
+use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,9 +43,10 @@ Route::prefix('v1')->group(function(){
 
         Route::controller(TransactionController::class)->group(function(){
             Route::post('/transaksi', 'store');
-            // Route::get('/transaction', 'index');
-            // Route::get('/transaction/{transaction}', 'show');
-            // Route::delete('/transaction/{transaction}', 'destroy');
+        });
+
+        Route::controller(SubscriptionsController::class)->group(function() {
+            Route::get('/langganan', 'index');
         });
     });
 
@@ -67,4 +69,6 @@ Route::prefix('v1')->group(function(){
         Route::post('/user', [UserController::class, 'register']);
         Route::post('/user/login', [UserController::class, 'login']);
     });
+
+    
 });

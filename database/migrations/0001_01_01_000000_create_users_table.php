@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('aktivitas');
             $table->boolean('role')->default(false);
             $table->text('gambar')->nullable();
-            $table->boolean('premium')->default(false);
             $table->timestamp('premium_until')->nullable();
             $table->rememberToken();
             $table->timestamps();

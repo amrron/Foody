@@ -16,15 +16,12 @@ return new class extends Migration
             $table->foreignUuid('user_id');
             $table->foreignUuid('subscription_id');
             $table->string('order_id')->unique();
-            $table->string('status');
-            $table->string('payment_method');
-            $table->string('transaction_id');
-            $table->timestamp('transaction_time');
+            $table->string('status')->default('pending');
+            $table->string('payment_method')->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->timestamp('transaction_time')->nullable();
             $table->unsignedBigInteger('gross_amount');
-            $table->string('payment_code')->nullable(); // Kode pembayaran (untuk transfer bank)
-            $table->string('va_number')->nullable(); // Nomor Virtual Account (untuk bank transfer)
-            $table->string('bank')->nullable(); // Nama bank yang digunakan
-            $table->string('fraud_status')->nullable(); // Fraud status
+            $table->string('snap_token')->nullable();
             $table->timestamp('subscription_start')->nullable();
             $table->timestamp('subscription_end')->nullable();
             $table->timestamps();

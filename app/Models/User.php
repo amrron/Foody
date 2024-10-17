@@ -218,4 +218,8 @@ class User extends Authenticatable
     public function getLanggananAttribute(){
         return $this->is_premium && $this->premium_until > now();
     }
+
+    public function transactions() {
+        return $this->hasMany(Transaction::class);
+    }
 }

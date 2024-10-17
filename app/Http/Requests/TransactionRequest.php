@@ -24,7 +24,6 @@ class TransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'subscription_id' => 'required|exists:subscriptions,id'
         ];
     }
