@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\BmiResourece;
+use App\Http\Resources\BmiResponseResourece;
 use App\Http\Requests\CreateBmiRequest;
 
 class BmiController extends Controller
