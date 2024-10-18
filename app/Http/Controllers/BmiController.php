@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\BmiResourece;
-use App\Http\Resources\BmiResponseResourece;
+use App\Http\Resources\BmiResponseResource;
 use App\Http\Requests\CreateBmiRequest;
 
 class BmiController extends Controller
@@ -40,7 +40,7 @@ class BmiController extends Controller
                 'success' => true,
                 'status' => 'success',
                 'message' => 'Berhasil membuat data bmi',
-                'data' => new BmiResponseResourece($bmi)
+                'data' => new BmiResponseResource($bmi)
             ], 201);
 
         } catch (\Throwable $th) {
