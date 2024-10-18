@@ -21,9 +21,6 @@ class BmiResourece extends JsonResource
             'nilai_bmi' => $this->bmi,
             'waktu' => $this->created_at->format('Y/m/d'),
             'kategori' => $this->kategori,
-            'status' => $this->kategori['status'],
-            'warna' => $this->kategori['color'],
-            'warna_tebal' => $this->kategori['strongColor']
         ];
     }
 }
