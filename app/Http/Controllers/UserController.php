@@ -94,7 +94,8 @@ class UserController extends Controller
             'success' => true,
             'status' => 'success',
             'message' => 'Berhasil mengambil data',
-            'data' => new UserResource($user)
+            'data' => new UserResource($user),
+            'summary' => new SummaryResource($user),
         ], 200);
     }
 
