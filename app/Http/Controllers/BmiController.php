@@ -39,7 +39,7 @@ class BmiController extends Controller
                 'success' => true,
                 'status' => 'success',
                 'message' => 'Berhasil membuat data bmi',
-                'data' => new BmiResourece($bmi)
+                'data' => new BmiResponseResourece($bmi)
             ], 201);
 
         } catch (\Throwable $th) {
