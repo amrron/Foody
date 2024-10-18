@@ -19,7 +19,9 @@ class BmiResourece extends JsonResource
             'berat_badan' => $this->berat_badan,
             'tinggi_badan' => $this->tinggi_badan,
             'nilai_bmi' => $this->bmi,
-            'kategori' => $this->kategori
+            'kategori' => $this->kategori['status'],
+            'warna' => $this->kategori['color'],
+            'warna_tebal' => $this->kategori['strongColor']
         ];
     }
 }
