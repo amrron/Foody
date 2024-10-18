@@ -64,7 +64,7 @@ class FoodRecordController extends Controller
         return response()->json([
             'success' => true,
             'status' => 'success',
-            'message' => 'Data catatan makanan hari ini',
+            'message' => $this->chart(),
             'data' => FoodRecordResource::collection($foodRecord)
         ], 201);
     }
@@ -122,4 +122,50 @@ class FoodRecordController extends Controller
             ], 401);
         }
     }
+
+    private function chart() {
+        
+        $data = [
+            "labels" => ["Karbohidrat", "Protein", "Garam", "Gula", "Lemak"],
+            "datasets" => [
+                [
+                    "label" => "Dataset 1",
+                    "data" => [round(auth()->user()->dailyKarbo, 1), round(auth()->user()->dailyProtein, 1), round(auth()->user()->dailyGaram, 1), round(auth()->user()->dailyGula, 1), round(auth()->user()->dailyLemak, 1)],
+                    "backgroundColor" => [
+                        "rgb(51, 161, 77)",
+                        "rgb(219, 243, 251)",
+                        "rgb(253, 206, 208)",
+                        "rgb(17, 17, 17)",
+                        "rgb(202, 200, 230)",
+                    ],
+                ],
+            ],
+        ];
+
+        $config = [
+            "type" => "doughnut",
+            "data" => $data,
+            "options" => [
+                "responsive" => true,
+                "plugins" => [
+                    "legend" => [
+                        "position" => "top",
+                        "display" => false
+                    ],
+                    "title" => ["display" => false],
+                    "doughnutlabel" => [
+                        "labels" => [
+                            [ "text" => auth()->user()->dailyKarbohidrat + auth()->user()->dailyProtein + auth()->user()->dailyGaram + auth()->user()->dailyGula + auth()->user()->dailyLemak, "font" => [ "size" => 20 ] ], 
+                            [ "text" => 'total' ]
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $link = "https://quickchart.io/chart?v=4&bkg=white&width=300&height=300&f=png&c=" . json_encode($config);
+
+        return $link;
+    }
+
 }
