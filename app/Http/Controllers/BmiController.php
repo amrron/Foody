@@ -60,7 +60,7 @@ class BmiController extends Controller
         return response()->json([
             'success' => true,
             'status' => 'success',
-            'message' => 'Berhasil mendapatkan data BMI terbaru',
+            'message' => $this->apichart(),
             'data' => BmiResourece::collection($bmi)
         ], 200);
     }
@@ -81,7 +81,7 @@ class BmiController extends Controller
         return response()->json([
             'success' => true,
             'status' => 'success',
-            'message' => $this->apichart(),
+            'message' => 'Data bmi terbaru',
             'data' => $data
         ], 200);
     }
