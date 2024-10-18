@@ -24,7 +24,7 @@ class UpdateProfileImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gambar' => 'required|image|file|mimes:jpg,jpeg,png,gif|max:2048|'
+            'gambar' => 'image|file|max:2048'
         ];
     }
 
