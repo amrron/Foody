@@ -93,6 +93,6 @@ class TransactionController extends Controller
     public function pay($snap_token) {
         $client_key = config('midtrans.clientKey');
         $is_production = config('midtrans.isProduction');
-        return view('payment', compact('snap_token', 'client_key', 'is_production'));
+        return view('transaksi.pay', compact('snap_token', 'client_key', 'is_production'));
     }
 }
