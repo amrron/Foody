@@ -89,4 +89,10 @@ class TransactionController extends Controller
         $orderNumber = $prefix . $randomNumber;
         return $orderNumber;
     }
+
+    public function pay($snap_token) {
+        $client_key = config('midtrans.clientKey');
+        $is_production = config('midtrans.isProduction');
+        return view('payment', compact('snap_token', 'client_key', 'is_production'));
+    }
 }

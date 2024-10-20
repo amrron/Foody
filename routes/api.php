@@ -72,4 +72,5 @@ Route::prefix('v1')->group(function(){
     });
 
     Route::post('/midtrans/notif-hook', MidtransNotificationController::class);
+    Route::get('/transaksi/bayar/{sanp_token}', [TransactionController::class, 'pay']);
 });
