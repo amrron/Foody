@@ -36,9 +36,15 @@ class TransactionController extends Controller
                 'gross_amount' => $subscription->price
             ];
 
+            $customer_details = [
+                'first_name' => $user->name,
+                'email' => $user->email,
+            ];
+
             $params = [
                 'transaction_details' => $transaction_details,
-                'item_details' => $item_details
+                'item_details' => $item_details,
+                'customer_details' => $customer_details
             ];
             
             // Set your Merchant Server Key
@@ -90,9 +96,9 @@ class TransactionController extends Controller
         return $orderNumber;
     }
 
-    public function pay($snap_token) {
+    public function pay(Transaction $transaction) {
         $client_key = config('midtrans.clientKey');
         $is_production = config('midtrans.isProduction');
-        return view('transaksi.pay', compact('snap_token', 'client_key', 'is_production'));
+        return view('transaksi.pay', compact('transaction', 'client_key', 'is_production'));
     }
 }
