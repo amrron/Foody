@@ -71,6 +71,6 @@ Route::prefix('v1')->group(function(){
         Route::post('/user/login', [UserController::class, 'login']);
     });
 
-    Route::post('/midtrans/notif-hook', MidtransNotificationController::class);
+    Route::post('/midtrans/notif-hook', [MidtransNotificationController::class, 'notif']);
     Route::get('/transaksi/bayar/{transaction}', [TransactionController::class, 'pay']);
 });

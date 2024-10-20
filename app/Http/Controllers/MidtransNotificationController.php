@@ -12,7 +12,7 @@ class MidtransNotificationController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function notif(Request $request)
     {
         $payload = $request->all();
 
