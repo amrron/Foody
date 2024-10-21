@@ -50,9 +50,9 @@ class MidtransNotificationController extends Controller
             $transaction->status = $transaction_status;
             
             if ($user->langganan) {
-                $transaction->subscription_start = Carbon::createFromFormat('YYYY-MM-DD HH:MM:SS', $user->premium_until);
-                $transaction->subscription_end = Carbon::createFromFormat('YYYY-MM-DD HH:MM:SS', $user->premium_until)->addDays($subscriptionDay);
-                $user->premium_until = Carbon::createFromFormat('YYYY-MM-DD HH:MM:SS', $user->premium_until)->addDays($subscriptionDay);
+                $transaction->subscription_start = $user->premium_until;
+                $transaction->subscription_end = $user->premium_until->addDays($subscriptionDay);
+                $user->premium_until = $user->premium_until->addDays($subscriptionDay);
             } 
             else {
                 $transaction->subscription_start = now();
