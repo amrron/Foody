@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Resources\TransactionResource;
 
+use function PHPUnit\Framework\isNull;
+
 class TransactionController extends Controller
 {
     public function store(TransactionRequest $request) {
@@ -107,8 +109,8 @@ class TransactionController extends Controller
     public function success(Request $request) {
         Carbon::setLocale('id');
         $transaction = Transaction::where('order_id', $request->order_id)->first();
-        $date = $transaction->transaction_time ? Carbon::parse($transaction->transaction_time)->toFormattedDateString() : now()->toFormattedDateString();
-        $time = $transaction->transaction_time ? Carbon::parse($transaction->transaction_time)->toTimeString() : now()->toTimeString();
+        $date = !isNull($transaction->transaction_time) ? Carbon::parse($transaction->transaction_time)->toFormattedDateString() : now()->toFormattedDateString();
+        $time = !isNull($transaction->transaction_time) ? Carbon::parse($transaction->transaction_time)->toTimeString() : now()->toTimeString();
         
         return view('transaksi.success', compact('transaction', 'date', 'time'));
     }
