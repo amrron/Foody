@@ -18,17 +18,17 @@ class MidtransNotificationController extends Controller
         $status_code = $request->status_cod;
         $gross_amount = $request->gross_amount;
 
-        $req_signature = $request->signature_key;
+        // $req_signature = $request->signature_key;
 
-        $signature = hash('sha512', $order_id.$status_code.$gross_amount.config('midtrans.serverkey'));
+        // $signature = hash('sha512', $order_id.$status_code.$gross_amount.config('midtrans.serverkey'));
 
-        if ($signature != $req_signature) {
-            return response()->json([
-                'success' => false,
-                'status' => 'error',
-                'message' => 'Invalid signature'
-            ], 401); 
-        }
+        // if ($signature != $req_signature) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'status' => 'error',
+        //         'message' => 'Invalid signature'
+        //     ], 401); 
+        // }
 
         $transaction_status = $request->transaction_status;
         $transaction = Transaction::where('order_id', $order_id)->first();
