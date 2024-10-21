@@ -14,9 +14,6 @@ class MidtransNotificationController extends Controller
      */
     public function notif(Request $request)
     {
-        // $payload = $request->all();
-        return response()->json($request);
-
         $order_id = $request->order_id;
         $status_code = $request->status_cod;
         $gross_amount = $request->gross_amount;
