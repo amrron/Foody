@@ -25,7 +25,7 @@ class Bmi extends Model
     }
 
     public function getKategoriAttribute(){
-        $bmi = $this->nilai;
+        $bmi = $this->bmi;
 
         if($bmi < 18.5){
             return [

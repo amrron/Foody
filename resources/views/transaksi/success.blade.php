@@ -49,11 +49,15 @@
               </div>
           </div>
         </div>
-        <button id="pay-button" class="rounded-xl w-full p-3 py-4 font-poppins font-medium text-lg text-center text-[#D9F4FF] bg-[#131049]">
+        <button id="close-button" class="rounded-xl w-full p-3 py-4 font-poppins font-medium text-lg text-center text-[#D9F4FF] bg-[#131049]">
             Selesai
         </button>
     </div>
-
+    <script>
+      document.getElementById('close-button').addEventListener('click', function() {
+        Android.closeActivity();
+      })
+    </script>
     <script>
       // Fungsi untuk memformat angka menjadi format Rupiah
       function formatRupiah(angka) {
