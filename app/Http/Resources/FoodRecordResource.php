@@ -17,7 +17,7 @@ class FoodRecordResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nama' => $this->name,
+            'nama' => $this->nama,
             'jumlah' => $this->jumlah,
             'waktu' => Carbon::parse($this->waktu)->format('H:i'),
             'karbohidrat' => $this->karbohidrat * $this->jumlah,
