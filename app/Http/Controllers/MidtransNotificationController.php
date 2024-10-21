@@ -45,7 +45,7 @@ class MidtransNotificationController extends Controller
         $user = User::find($transaction->user_id);
         $subscriptionDay = Subscription::find($transaction->subscription_id)->duration;
 
-        // if ($transaction_status == 'settlement') {
+        if ($transaction_status == 'settlement' || $transaction_status == 'campture') {
 
             $transaction->status = $transaction_status;
             
@@ -65,7 +65,7 @@ class MidtransNotificationController extends Controller
             $transaction->save();
             $user->save();
 
-        // }
+        }
 
         return response()->json([
             'success' => true,
