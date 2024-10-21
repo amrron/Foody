@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
+use App\Models\Subscription;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Resources\TransactionResource;
-use App\Models\Subscription;
-use App\Models\Transaction;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -101,5 +102,12 @@ class TransactionController extends Controller
         $is_production = config('midtrans.isProduction');
         $addPrice = $transaction->subscription->price == 15000 ? 3000 : ($transaction->subscription->price == 35000 ? 10000 : 30000);
         return view('transaksi.pay', compact('transaction', 'client_key', 'is_production', 'addPrice'));
+    }
+
+    public function success(Request $request) {
+        Carbon::setLocale('id');
+        $transaction = Transaction::where('order_id', $request->order_id)->first();
+
+        return view('transaksi.success', compact('transaction'));
     }
 }
