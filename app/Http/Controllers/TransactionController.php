@@ -99,6 +99,7 @@ class TransactionController extends Controller
     public function pay(Transaction $transaction) {
         $client_key = config('midtrans.clientKey');
         $is_production = config('midtrans.isProduction');
-        return view('transaksi.pay', compact('transaction', 'client_key', 'is_production'));
+        $addPrice = $transaction->subscription->price == 15000 ? 3000 : ($transaction->subscription->price == 35000 ? 10000 : 30000);
+        return view('transaksi.pay', compact('transaction', 'client_key', 'is_production', 'addPrice'));
     }
 }
