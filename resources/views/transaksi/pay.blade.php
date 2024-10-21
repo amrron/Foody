@@ -23,54 +23,56 @@
     </style>
 </head>
 <body>
-    <div class="w-full h-dvh flex flex-col justify-center items-center relative">
-        <div class="bg-[#D9F4FF] p-5 rounded-xl w-4/5 relative">
-            <h1 class="text-2xl text-[#131049] font-bold font-poppins text-center">FOODY PREMIUM</h1>
-            <div class="flex flex-col items-center py-6 font-roboto">
-                <p class="text-sm text-[#9FA2AB] font-medium mb-2">Total Pembayaran</p>
-                <p class="text-2xl font-bold text-[#1D1B23] rupiah">{{ $transaction->gross_amount }}</p>
-            </div>
-            <div class="flex justify-between items-center font-roboto mt-3">
-              <p class="font-medium text-[#9FA2AB] teks-sm">Paket Langganan</p>
-              <p class="font-medium text-[#1D1B23] teks-sm">{{ $transaction->subscription->duration / 30 }} Bulan</p>
-            </div>
-            <div class="flex justify-between items-center font-roboto mt-3">
-              <p class="font-medium text-[#9FA2AB] teks-sm">Durasi</p>
-              <p class="font-medium text-[#1D1B23] teks-sm">{{ $transaction->subscription->duration }} Hari</p>
-            </div>
-            <div class="flex justify-between items-center font-roboto mt-3">
-              <p class="font-medium text-[#9FA2AB] teks-sm">Harga</p>
-              <p class="font-medium text-[#1D1B23] teks-sm rupiah">{{ $price }}</p>
-            </div>
-            <div class="flex justify-between items-center font-roboto mt-3 mb-3">
-              <p class="font-medium text-[#9FA2AB] teks-sm">Diskon</p>
-              <p class="font-medium text-[#1D1B23] teks-sm rupiah">{{ $addPrice }}</p>
-            </div>
-            
-            <div class="w-full border-b border-dashed border-[#9FA2AB]"></div>
-            <div class="flex justify-between items-center font-roboto mt-3">
-              <p class="font-medium text-[#9FA2AB] teks-sm">Hemat</p>
-              <p class="font-medium text-[#1D1B23] teks-sm">{{ $discount }}%</p>
-            </div>
-            <div class="flex justify-between items-center font-roboto mt-3 mb-4">
-              <p class="font-bold text-[#1D1B23] teks-sm">Total</p>
-              <p class="font-bold text-[#1251D4] teks-sm rupiah">{{ $transaction->gross_amount }}</p>
-            </div>
-            <div class="flex justify-between absolute translate-y-[50%] w-full">
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-              <div class="w-5 h-5 bg-white rounded-full"></div>
-            </div>
+    <div class="w-full h-dvh flex flex-col justify-between items-center p-5">
+        <div class="w-full flex-grow flex justify-center items-center">
+            <div class="bg-[#D9F4FF] p-5 rounded-xl w-full relative">
+              <h1 class="text-2xl text-[#131049] font-bold font-poppins text-center">FOODY PREMIUM</h1>
+              <div class="flex flex-col items-center py-6 font-roboto">
+                  <p class="text-sm text-[#9FA2AB] font-medium mb-2">Total Pembayaran</p>
+                  <p class="text-2xl font-bold text-[#1D1B23] rupiah">{{ $transaction->gross_amount }}</p>
+              </div>
+              <div class="flex justify-between items-center font-roboto mt-3">
+                <p class="font-medium text-[#9FA2AB] teks-sm">Paket Langganan</p>
+                <p class="font-medium text-[#1D1B23] teks-sm">{{ $transaction->subscription->duration / 30 }} Bulan</p>
+              </div>
+              <div class="flex justify-between items-center font-roboto mt-3">
+                <p class="font-medium text-[#9FA2AB] teks-sm">Durasi</p>
+                <p class="font-medium text-[#1D1B23] teks-sm">{{ $transaction->subscription->duration }} Hari</p>
+              </div>
+              <div class="flex justify-between items-center font-roboto mt-3">
+                <p class="font-medium text-[#9FA2AB] teks-sm">Harga</p>
+                <p class="font-medium text-[#1D1B23] teks-sm rupiah">{{ $price }}</p>
+              </div>
+              <div class="flex justify-between items-center font-roboto mt-3 mb-3">
+                <p class="font-medium text-[#9FA2AB] teks-sm">Diskon</p>
+                <p class="font-medium text-[#1D1B23] teks-sm rupiah">{{ $addPrice }}</p>
+              </div>
+              
+              <div class="w-full border-b border-dashed border-[#9FA2AB]"></div>
+              <div class="flex justify-between items-center font-roboto mt-3">
+                <p class="font-medium text-[#9FA2AB] teks-sm">Hemat</p>
+                <p class="font-medium text-[#1D1B23] teks-sm">{{ $discount }}%</p>
+              </div>
+              <div class="flex justify-between items-center font-roboto mt-3 mb-4">
+                <p class="font-bold text-[#1D1B23] teks-sm">Total</p>
+                <p class="font-bold text-[#1251D4] teks-sm rupiah">{{ $transaction->gross_amount }}</p>
+              </div>
+              <div class="flex justify-between absolute translate-y-[50%] w-full">
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+                <div class="w-5 h-5 bg-white rounded-full"></div>
+              </div>
+          </div>
         </div>
-        <button id="pay-button" class="absolute bottom-5 rounded-xl w-4/5 p-3 font-poppins text-lg text-center text-[#D9F4FF] bg-[#131049]">
-            Pilih Pembayara
+        <button id="pay-button" class="rounded-xl w-full p-3 py-4 font-poppins font-medium text-lg text-center text-[#D9F4FF] bg-[#131049]">
+            Pilih Pembayaran
         </button>
     </div>
     <script type="text/javascript">
