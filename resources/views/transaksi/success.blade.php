@@ -32,11 +32,11 @@
               </div>
               <div class="flex justify-between items-center font-roboto mt-3">
                 <p class="text-[#707070] teks-sm">Tanggal</p>
-                <p class="font-medium text-[#1D1B23] teks-sm">{{ Carbon::parse(transaction->$transaction_time)->toFormattedDateString() }}</p>
+                <p class="font-medium text-[#1D1B23] teks-sm">{{ $date }}</p>
               </div>
               <div class="flex justify-between items-center font-roboto mt-3">
                 <p class="text-[#707070] teks-sm">Waktu</p>
-                <p class="font-medium text-[#1D1B23] teks-sm">{{ Carbon::parse(transaction->$transaction_time)->toTimeString();  }}</p>
+                <p class="font-medium text-[#1D1B23] teks-sm">{{ $time }}</p>
               </div>
               <div class="flex justify-between items-center font-roboto mt-3 mb-3">
                 <p class="text-[#707070] teks-sm">Metode Pembayaran</p>
