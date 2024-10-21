@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subscription;
-use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Transaction;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class MidtransNotificationController extends Controller
 {
@@ -45,14 +46,25 @@ class MidtransNotificationController extends Controller
         $subscriptionDay = Subscription::find($transaction->subscription_id)->duration;
 
         if ($transaction_status == 'settlement') {
+
             $transaction->status = $transaction_status;
-            $transaction->subscription_start = now()->timestamp;
-            $transaction->subscription_end = now()->addDays($subscriptionDay)->timestamp;
+            
+            if ($user->langganan) {
+                $transaction->subscription_start = Carbon::createFromFormat('YYYY-MM-DD HH:MM:SS', $user->premium_until);
+                $transaction->subscription_end = Carbon::createFromFormat('YYYY-MM-DD HH:MM:SS', $user->premium_until)->addDays($subscriptionDay);
+                $user->premium_until = Carbon::createFromFormat('YYYY-MM-DD HH:MM:SS', $user->premium_until)->addDays($subscriptionDay);
+            } 
+            else {
+                $transaction->subscription_start = now();
+                $transaction->subscription_end = now()->addDays($subscriptionDay);
+                $user->premium_until = now()->addDays($subscriptionDay);
+            }
+
             $transaction->payment_method = $request->payment_type;
             $transaction->transaction_time = $request->transaction_time;
             $transaction->save();
+            $user->save();
 
-            $user->premium_until = now()->addDays($subscriptionDay)->timestamp;
         }
 
         return response()->json([
