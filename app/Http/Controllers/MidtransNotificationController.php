@@ -14,15 +14,15 @@ class MidtransNotificationController extends Controller
      */
     public function notif(Request $request)
     {
-        $payload = $request->all();
+        // $payload = $request->all();
 
-        $order_id = $payload['order_id'];
-        $status_code = $payload['status_code'];
-        $gross_amount = $payload['gross_amount'];
+        $order_id = $request->order_id;
+        $status_code = $request->status_cod;
+        $gross_amount = $request->gross_amount;
 
-        $req_signature = $payload['signature_key'];
+        $req_signature = $request->signature_key;
 
-        $signature =  hash('sha512', $order_id.$status_code.$gross_amount.config('midtrans.serverkey'));
+        $signature = hash('sha512', $order_id.$status_code.$gross_amount.config('midtrans.serverkey'));
 
         if ($signature != $req_signature) {
             return response()->json([
@@ -32,7 +32,7 @@ class MidtransNotificationController extends Controller
             ], 401); 
         }
 
-        $transaction_status = $payload['transaction_status'];
+        $transaction_status = $request->transaction_status;
         $transaction = Transaction::where('order_id', $order_id)->first();
         if (!$transaction) {
             return response()->json([
@@ -50,9 +50,8 @@ class MidtransNotificationController extends Controller
             $transaction->status = $transaction_status;
             $transaction->subscription_start = now()->timestamp;
             $transaction->subscription_end = now()->addDays($subscriptionDay)->timestamp;
-            $transaction->payment_method = $payload['payment_type'];
-            $transaction->transaction_time = $payload['transaction_time'];
-            $transaction->transaction_time = $payload['transaction_time'];
+            $transaction->payment_method = $request->payment_type;
+            $transaction->transaction_time = $request->transaction_time;
             $transaction->save();
 
             $user->premium_until = now()->addDays($subscriptionDay)->timestamp;
