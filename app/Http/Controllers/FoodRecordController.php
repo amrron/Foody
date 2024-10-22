@@ -76,6 +76,7 @@ class FoodRecordController extends Controller
 
         foreach ($groupedFoodRecord as $tanggal => $foodRecords) {
             $data[] = [
+                'hari' => Carbon::parse($tanggal)->locale('id')->dayName,
                 'tanggal' => $tanggal,
                 'data' => FoodRecordResource::collection($foodRecords)
             ];
