@@ -25,7 +25,6 @@ class GenerateFoodRequest extends FormRequest
     {
         return [
             'makanan' => 'required|string|max:64',
-            'detail' => 'string|max:127',
         ];
     }
 

@@ -120,7 +120,7 @@ class FoodController extends Controller
 
         $validatedRequest = $request->validated();
 
-        $compilation = $this->aIgenerate($request->makanan, $request->detail ?? '');
+        $compilation = $this->aIgenerate($request->makanan);
 
         if (!count($compilation['choices'])) {
             return response()->json([
@@ -141,7 +141,7 @@ class FoodController extends Controller
         ], 201);
     }
 
-    private function aIgenerate($makanan, $detail) {
+    private function aIgenerate($makanan) {
         $compilation = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [
@@ -151,7 +151,7 @@ class FoodController extends Controller
                 ],
                 [
                     'role' => 'user', 
-                    'content' => $makanan . ': ' . $detail
+                    'content' => $makanan
                 ]
             ],
             'max_tokens' => 150,
