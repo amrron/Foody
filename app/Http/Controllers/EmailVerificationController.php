@@ -32,7 +32,7 @@ class EmailVerificationController extends Controller
 
             return response()->json([
                 'success' => true,
-                'status' => 'succes',
+                'status' => 'success',
                 'message' => 'Email berhasil diverifikasi'
             ], 201);
             
