@@ -132,7 +132,7 @@ class BmiController extends Controller
         
         $nilai = [];
         foreach($bmi as $bm) {
-            array_push($nilai, $bm->nilai);
+            array_push($nilai, $bm->bmi);
         }
         $value = $nilai;
 
