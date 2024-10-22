@@ -24,7 +24,7 @@ Route::prefix('v1')->group(function(){
             Route::post('/bmi', 'store');
             Route::get('/bmi/recent', 'recent');
             Route::get('/bmi/history', 'history');
-            Route::get('/bmi/chart', 'apichart');
+            Route::get('/bmi/chart', 'chart');
             Route::delete('/bmi/{bmi}', 'destroy');
         });
 

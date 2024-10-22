@@ -57,11 +57,12 @@ class BmiController extends Controller
 
     public function recent() {
         $bmi = Bmi::where('user_id', auth()->id())->latest()->get()->take(3);
+        $todayBmiCount = Bmi::where('user_id', auth()->id())->whereDate('created_at', now())->count();
 
         return response()->json([
             'success' => true,
             'status' => 'success',
-            'message' => $this->apichart(),
+            'message' => $todayBmiCount,
             'data' => BmiResourece::collection($bmi)
         ], 200);
     }
@@ -121,7 +122,15 @@ class BmiController extends Controller
         }
     }
 
-    public function apichart() {
+    public function chart() {
+        return response()->json([
+            'success' => true,
+            'status' => 'success',
+            'message' => $this->apichart()
+        ]);
+    }
+
+    private function apichart() {
 
         $labels = Bmi::where('user_id', auth()->user()->id)->orderBy('created_at')->pluck('created_at')->toArray();
         if(count($labels) < 2) {
