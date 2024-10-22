@@ -109,14 +109,14 @@ class FoodController extends Controller
 
         $user = auth()->user();
 
-        if (!$user->langganan) {
-            return response()->json([
-                'success' => false,
-                'status' => 'error',
-                'error' => 'Gagal membuat data makanan',
-                'message' => 'Fitur ini khusus pengguna premium'
-            ], 401);
-        }
+        // if (!$user->langganan) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'status' => 'error',
+        //         'error' => 'Gagal membuat data makanan',
+        //         'message' => 'Fitur ini khusus pengguna premium'
+        //     ], 401);
+        // }
 
         $validatedRequest = $request->validated();
 
