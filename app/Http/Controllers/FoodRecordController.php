@@ -19,7 +19,7 @@ class FoodRecordController extends Controller
         $user = auth()->user();
         $foods = FoodRecord::where('user_id', $user->id)->whereDate('created_at', now())->count();
 
-        if ($foods > 1 && !$user->langganan) {
+        if ($foods >= 3 && !$user->langganan) {
             return response()->json([
                 'success' => false,
                 'status' => 'error',
