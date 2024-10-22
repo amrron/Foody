@@ -40,7 +40,7 @@ class FoodController extends Controller
 
         $validatedRequest = $request->validated();
 
-        $compilation = $this->generate($request->makanan, $request->detail ?? '');
+        $compilation = $this->aIgenerate($request->makanan, $request->detail ?? '');
 
         if (!count($compilation['choices'])) {
             return response()->json([
@@ -105,7 +105,43 @@ class FoodController extends Controller
         ], 201);
     }
 
-    private function generate($makanan, $detail) {
+    public function generate(GenerateFoodRequest $request) {
+
+        $user = auth()->user();
+
+        if (!$user->langganan) {
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'error' => 'Gagal membuat data makanan',
+                'message' => 'Fitur ini khusus pengguna premium'
+            ], 401);
+        }
+
+        $validatedRequest = $request->validated();
+
+        $compilation = $this->aIgenerate($request->makanan, $request->detail ?? '');
+
+        if (!count($compilation['choices'])) {
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'message' => 'Gagal membuat data makanan',
+                'error' => 'Kesalahan dalam menghasilkan data makanan'
+            ], 501);
+        }
+
+        $data = json_decode($compilation['choices'][0]['message']['content'], true);
+
+        return response()->json([
+            'success' => true,
+            'status' => 'success',
+            'message' => 'Berhasil membuat data makanan',
+            'data' => $data
+        ], 201);
+    }
+
+    private function aIgenerate($makanan, $detail) {
         $compilation = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [

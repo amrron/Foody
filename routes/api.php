@@ -40,6 +40,7 @@ Route::prefix('v1')->group(function(){
             Route::get('/makanan', 'index');
             Route::get('/makanan/{food}', 'show');
             Route::post('/makanan/create', 'create');
+            Route::post('/makanan/generate', 'generate');
         });
 
         Route::controller(TransactionController::class)->group(function(){
