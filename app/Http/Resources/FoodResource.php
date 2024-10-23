@@ -19,7 +19,7 @@ class FoodResource extends JsonResource
             'nama' => $this->nama,
             'deskripsi' => $this->deskripsi,
             'slug' => $this->slug,
-            'gambar' => $this->gambar ?? null,
+            'gambar' => $this->gambar ?? "https://img.freepik.com/premium-vector/circular-arrangement-various-food-items-flat-cartoon-style_1092570-4604.jpg",
             'karbohidrat' => $this->karbohidrat,
             'protein' => $this->protein,
             'lemak' => $this->lemak,
