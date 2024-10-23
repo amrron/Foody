@@ -237,7 +237,7 @@ class BmiController extends Controller
             ]
         ];
 
-        $link = "https://quickchart.io/chart?v=4&bkg=rgb(217, 244, 255)&f=svg&c=" . json_encode($setup);
+        $link = "https://quickchart.io/chart?v=4&bkg=rgb(217, 244, 255)&f=jpg&c=" . json_encode($setup);
         return $link;
     }
 }
