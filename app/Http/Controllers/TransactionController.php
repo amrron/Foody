@@ -109,8 +109,8 @@ class TransactionController extends Controller
     public function success(Request $request) {
         Carbon::setLocale('id');
         $transaction = Transaction::where('order_id', $request->order_id)->first();
-        $date = !isNull($transaction->transaction_time) ? Carbon::parse($transaction->transaction_time)->toFormattedDateString() : now()->toFormattedDateString();
-        $time = !isNull($transaction->transaction_time) ? Carbon::parse($transaction->transaction_time)->toTimeString() : now()->toTimeString();
+        $date = !isset($transaction->transaction_time) ? Carbon::parse($transaction->transaction_time)->toFormattedDateString() : now()->toFormattedDateString();
+        $time = !isset($transaction->transaction_time) ? Carbon::parse($transaction->transaction_time)->toTimeString() : now()->toTimeString();
         
         return view('transaksi.success', compact('transaction', 'date', 'time'));
     }
