@@ -254,7 +254,7 @@ class UserController extends Controller
                 return response()->json([
                     'success' => false,
                     'status' => 'error',
-                    'message' => 'Password lama salah',
+                    'message' => 'Password salah',
                 ], 401);
             }
 
