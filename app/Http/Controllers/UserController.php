@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Resources\SummaryResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UpdateProfileImageRequest;
 use App\Notifications\EmailVerificationNotification;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -236,6 +238,45 @@ class UserController extends Controller
                 'success' => false,
                 'status' => 'error',
                 'message' => 'Gagal menghapus gambar',
+                'error' => $th->getMessage()
+            ], 501);
+        }
+    }
+
+    public function resetPassword(ResetPasswordRequest $request) {
+        $user = auth()->user();
+        $request->validated();
+
+        try {
+            DB::beginTransaction();
+
+            if (!Hash::check($request->current_password, $user->password)) {
+                return response()->json([
+                    'success' => false,
+                    'status' => 'error',
+                    'message' => 'Password lama salah',
+                ], 401);
+            }
+
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'status' => 'success',
+                'message' => 'Berhasil mereset password',
+                'data' => new UserResource($user)
+            ]);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'status' => 'error',
+                'message' => 'Gagal mereset password',
                 'error' => $th->getMessage()
             ], 501);
         }

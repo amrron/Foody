@@ -15,6 +15,7 @@ Route::prefix('v1')->group(function(){
     Route::middleware(['auth:sanctum', 'email_verified'])->group(function(){
         Route::controller(UserController::class)->group(function(){
             Route::put('/user', 'update');
+            Route::put('/user/password', 'resetPassword');
             Route::post('/user/image', 'updateImage');
             Route::get('/user/summary', 'summary');
             Route::delete('/user/image', 'removeImage');
