@@ -117,7 +117,9 @@ class TransactionController extends Controller
     }
 
     public function index() {
-        $transactions = Transaction::with('subscription')->where('user_id', auth()->id())->latest()->get();
+        $transaction =  Transaction::with('subscription')->where('user_id', auth()->id())->latest()->get();
+        
+        dd($transaction);
 
         return response()->json([
             'success' => true,
