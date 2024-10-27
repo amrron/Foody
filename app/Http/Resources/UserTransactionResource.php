@@ -18,7 +18,7 @@ class UserTransactionResource extends JsonResource
         return [
             'id' => $this->id,
             'nama_paket' => $this->subscription->name,
-            'metode_pembayaran' => $this->payment_method,
+            'metode_pembayaran' => $this->payment_method ?? '-',
             'no_transaksi' => $this->order_id,
             'jumlah_bayar' => $this->gross_amount,
             'status' => $this->status,
