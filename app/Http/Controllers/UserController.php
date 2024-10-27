@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Bmi;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\FoodRecord;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Resources\SummaryResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UpdateProfileImageRequest;
 use App\Notifications\EmailVerificationNotification;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -280,5 +282,46 @@ class UserController extends Controller
                 'error' => $th->getMessage()
             ], 501);
         }
+    }
+
+    public function reportPdf(Request $request) {
+        $user = auth()->user();
+        $foodRecords = FoodRecord::where('user_id', $user->id);
+
+        if(isset($request->from) && isset($request->to)){
+            $foodRecords = $foodRecords->whereBetween('created_at', [$request->from, $request->to]);
+        }
+        
+        if(isset($request->from)){
+            $foodRecords = $foodRecords->where('created_at', '>=', $request->from);
+        }
+        
+        if(isset($request->to)){
+            $foodRecords = $foodRecords->where('created_at', '<=', $request->to . ' 23:59');
+        }
+
+        $foodRecords = $foodRecords->latest()->get();
+        $catatanPerTanggal = $foodRecords->groupBy('tanggalWaktu');
+        $total_jumlah = $foodRecords->sum('jumlah');
+        $total_karbohidrat = $foodRecords->sum(function($catatan){ return $catatan->jumlah * $catatan->karbohidrat; });
+        $total_protein = $foodRecords->sum(function($catatan){ return $catatan->jumlah * $catatan->protein; });
+        $total_lemak = $foodRecords->sum(function($catatan){ return $catatan->jumlah * $catatan->lemak; });
+        $total_gula = $foodRecords->sum(function($catatan){ return $catatan->jumlah * $catatan->gula; });
+        $total_garam = $foodRecords->sum(function($catatan){ return $catatan->jumlah * $catatan->garam; });
+
+        $data = [
+            'title' => "Report Catatan Makanan " . $user->name,
+            'catatans' => $catatanPerTanggal,
+            'total_jumlah' => $total_jumlah,
+            'total_karbohidrat' => $total_karbohidrat,
+            'total_protein' => $total_protein,
+            'total_garam' => $total_garam,
+            'total_gula' => $total_gula,
+            'total_lemak' => $total_lemak,
+        ];
+
+        $pdf = Pdf::loadView('report.report_view', $data);
+
+        return $pdf->download();
     }
 }

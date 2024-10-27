@@ -23,4 +23,8 @@ class FoodRecord extends Model
     {
         return Carbon::parse($this->waktu)->format('Y/m/d');
     }
+
+    public function getWaktuJamAttribute() {
+        return Carbon::parse($this->waktu)->format('H:i');
+    }
 }

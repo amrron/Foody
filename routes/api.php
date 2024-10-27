@@ -17,6 +17,7 @@ Route::prefix('v1')->group(function(){
             Route::put('/user', 'update');
             Route::put('/user/password', 'resetPassword');
             Route::post('/user/image', 'updateImage');
+            Route::post('/user/report', 'reportPdf');
             Route::get('/user/summary', 'summary');
             Route::delete('/user/image', 'removeImage');
         });
