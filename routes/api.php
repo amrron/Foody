@@ -46,6 +46,7 @@ Route::prefix('v1')->group(function(){
 
         Route::controller(TransactionController::class)->group(function(){
             Route::post('/transaksi', 'store');
+            Route::get('/transaksi', 'index');
         });
 
         Route::controller(SubscriptionsController::class)->group(function() {
@@ -76,5 +77,4 @@ Route::prefix('v1')->group(function(){
     Route::post('/midtrans/notif-hook', [MidtransNotificationController::class, 'notif']);
     Route::get('/transaksi/bayar/{transaction}', [TransactionController::class, 'pay']);
     Route::get('/transaksi/sukses', [TransactionController::class, 'success']);
-    Route::get('/transaksi', [TransactionController::class, 'index']);
 });

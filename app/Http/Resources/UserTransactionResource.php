@@ -22,8 +22,8 @@ class UserTransactionResource extends JsonResource
             'no_transaksi' => $this->order_id,
             'jumlah_bayar' => $this->gross_amount,
             'status' => $this->status,
-            'tanggal' =>  Carbon::parse($this->transaction_time ?? $this->created_at)->getDays(), 
-            'jam' => Carbon::parse($this->transaction_time ?? $this->created_at)->gettimeofday(),
+            'tanggal' =>  Carbon::parse($this->transaction_time ?? $this->created_at)->toDateString(), 
+            'jam' => Carbon::parse($this->transaction_time ?? $this->created_at)->toTimeString(),
         ];
     }
 }
