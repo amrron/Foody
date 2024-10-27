@@ -322,6 +322,6 @@ class UserController extends Controller
 
         $pdf = Pdf::loadView('report.report_view', $data);
 
-        return $pdf->download();
+        return $pdf->download("Report_Catatan_Makanan_" . auth()->user()->name . ".pdf");
     }
 }
