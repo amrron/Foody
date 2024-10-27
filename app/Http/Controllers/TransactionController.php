@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Resources\TransactionResource;
+use App\Http\Resources\UserTransactionResource;
 
 use function PHPUnit\Framework\isNull;
 
@@ -113,5 +114,15 @@ class TransactionController extends Controller
         $time = (!isset($transaction->transaction_time) && !isNull($transaction->transaction_time)) ? Carbon::parse($transaction->transaction_time)->toTimeString() : now()->toTimeString();
         
         return view('transaksi.success', compact('transaction', 'date', 'time'));
+    }
+
+    public function index() {
+        $transactions = Transaction::with('subscription')->where('user_id', auth()->id())->latest()->get();
+
+        return response()->json([
+            'success' => true,
+            'status' => 'success',
+            'data' => UserTransactionResource::collection($transactions)
+        ]);
     }
 }
