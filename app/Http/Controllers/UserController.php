@@ -300,7 +300,7 @@ class UserController extends Controller
             $foodRecords = $foodRecords->where('created_at', '<=', $request->to . ' 23:59');
         }
 
-        $foodRecords = $foodRecords->latest()->get();
+        $foodRecords = $foodRecords->get()->sortBy('waktu');
         $catatanPerTanggal = $foodRecords->groupBy('tanggalWaktu');
         $total_jumlah = $foodRecords->sum('jumlah');
         $total_karbohidrat = $foodRecords->sum(function($catatan){ return $catatan->jumlah * $catatan->karbohidrat; });
