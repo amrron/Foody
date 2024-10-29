@@ -131,7 +131,7 @@ class FoodRecordController extends Controller
             "datasets" => [
                 [
                     "label" => "Dataset 1",
-                    "data" => [round(auth()->user()->dailyKarbo, 1), round(auth()->user()->dailyProtein, 1), round(auth()->user()->dailyGaram, 1), round(auth()->user()->dailyGula, 1), round(auth()->user()->dailyLemak, 1)],
+                    "data" => [round(auth()->user()->dailyKarbohidrat, 1), round(auth()->user()->dailyProtein, 1), round(auth()->user()->dailyGaram, 1), round(auth()->user()->dailyGula, 1), round(auth()->user()->dailyLemak, 1)],
                     "backgroundColor" => [
                         "rgb(51, 161, 77)",
                         "rgb(219, 243, 251)",
