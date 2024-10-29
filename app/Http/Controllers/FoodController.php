@@ -154,7 +154,7 @@ class FoodController extends Controller
         return $compilation;
     }
 
-    public function aIRecommendation() {
+    public function recommendation() {
         $user = auth()->user();
         $kondisi_user = "Saya seorang $user->jenis_kelamin berusia $user->usia tahun dengan tinggi badan $user->tinggi_badan cm dan berat badan $user->berat_badan kg. Saya sudah mengkonsumsi makanan dengan total karbohidart $user->daily_karbohidrat g, protein $user->daily_protein g, lemak $user->daily_lemak g, garam $user->daily_garam g, dan gula $user->daily_gula g. Batas konsumsi kandungan nutris karbohidrat saya $user->batas_karbohidrat g, protein $user->batas_protein g, lemak $user->batas_lemak g, garam $user->batas_garam, dan gula $user->batas_gula g. Saya ingin mengetahui rekomendasi makanan yang sesuai dengan kondisi saya.";
 
