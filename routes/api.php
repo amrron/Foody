@@ -40,6 +40,7 @@ Route::prefix('v1')->group(function(){
 
         Route::controller(FoodController::class)->group(function(){
             Route::get('/makanan', 'index');
+            Route::get('/makanan/rekomendasi', 'aiRecommendation');
             Route::get('/makanan/{food}', 'show');
             Route::post('/makanan/create', 'create');
             Route::post('/makanan/generate', 'generate');
@@ -61,10 +62,10 @@ Route::prefix('v1')->group(function(){
             Route::post('/email-verification', 'verification');
             Route::post('/resend-otp', 'resend_otp');
         });
-        
+
         Route::controller(UserController::class)->group(function(){
             Route::put('/user', 'update');
-            Route::get('/user', 'profile'); 
+            Route::get('/user', 'profile');
             Route::post('/user/logout', 'logout');
         });
     });
