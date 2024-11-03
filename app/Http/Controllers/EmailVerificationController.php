@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Verified;
 use App\Http\Requests\EmailVerificationRequest;
 use App\Notifications\EmailVerificationNotification;
