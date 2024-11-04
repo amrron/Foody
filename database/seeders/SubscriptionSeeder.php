@@ -30,7 +30,7 @@ class SubscriptionSeeder extends Seeder
         $subscription6month = Subscription::create([
             'name' => '6 Bulan',
             'duration' => 180,
-            'price' => 80000,
+            'price' => 60000,
             'description' => 'Langganan selama 3 bulan / 90 Hari'
         ]);
     }
