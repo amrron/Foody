@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\BmiController;
-use App\Http\Controllers\EmailVerificationController;
-use App\Http\Controllers\FoodController;
-use App\Http\Controllers\FoodRecordController;
-use App\Http\Controllers\MidtransNotificationController;
-use App\Http\Controllers\SubscriptionsController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BmiController;
+use App\Http\Controllers\FoodController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReleaseController;
+use App\Http\Controllers\FoodRecordController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\SubscriptionsController;
+use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\MidtransNotificationController;
 
 Route::prefix('v1')->group(function(){
     // Route untuk user yang sudah login dan email terverifikasi
@@ -54,6 +55,8 @@ Route::prefix('v1')->group(function(){
         Route::controller(SubscriptionsController::class)->group(function() {
             Route::get('/langganan', 'index');
         });
+
+        Route::get('/release/latest', [ReleaseController::class, 'latest']);
     });
 
     // Route untuk user yang sudah login tapi email belum terverifikasi

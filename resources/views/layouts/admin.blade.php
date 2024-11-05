@@ -198,27 +198,92 @@
         </div>
     </div>
 
+    @stack('modal')
 
+    <!-- Toast -->
+    <!-- Toast untuk Pesan Sukses -->
+    <div id="successToast" class="hidden z-50 fixed top-16 right-5 flex items-start w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
+        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 001 1h2a1 1 0 100-2h-1V7z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Check icon</span>
+        </div>
+        <div class="ml-3 text-sm font-normal message">Rilis baru berhasil ditambahkan!</div>
+        <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#successToast" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
 
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['Poppins', 'sans-serif'],
-                        },
-                        colors: {
-                            'birumuda': '#D9F4FF',
-                            'biru': '#131049',
-                            'ping': '#FDCED0',
-                            'hijau': '#03543F',
-                            'merah': '#CD224C',
-                        },
+    <!-- Toast untuk Pesan Gagal -->
+    <div id="errorToast" class="hidden z-50 fixed top-16 right-5 flex items-start w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
+        <div class="inline-flex flex-shrinline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 001 1h2a1 1 0 100-2h-1V7z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Error icon</span>
+        </div>
+        <div class="ml-3 text-sm font-normal message">Terjadi kesalahan saat menambahkan rilis baru.</div>
+        <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#errorToast" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            @if(session('success'))
+                console.log('berhasil');
+                showToast('successToast', "{{ session('success') }}");
+            @elseif(session('error'))
+                showToast('errorToast', "{{ session('error') }}");
+                console.log('gagal');                    
+            @endif
+        });
+
+        function showToast(toastId, message) {
+            const toast = $('#' + toastId);
+            toast.removeClass('hidden');
+            toast.children('.message').text(message);
+
+            // Sembunyikan toast otomatis setelah 3 detik
+            setTimeout(() => {
+                toast.addClass('hidden');
+            }, 3000);
+        }
+
+        function closeToast(toastId) {
+            const toast = $('#' + toastId);
+            toast.addClass('hidden');
+        }
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'birumuda': '#D9F4FF',
+                        'biru': '#131049',
+                        'ping': '#FDCED0',
+                        'hijau': '#03543F',
+                        'merah': '#CD224C',
                     },
                 },
+            },
 
-            };
-        </script>
+        };
+    </script>
+
+    @stack('script')
 </body>
 
 </html>
