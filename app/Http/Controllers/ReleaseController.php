@@ -64,4 +64,10 @@ class ReleaseController extends Controller
             'data' => new ReleaseResource($release)
         ]);
     }
+
+    public function download() {
+        $release = Release::latest()->first();
+
+        return redirect($release->url);
+    }
 }

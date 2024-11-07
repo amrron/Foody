@@ -33,6 +33,4 @@ Route::prefix('admin')->group(function () {
 
 });
 
-Route::get('/download', function(){
-    return response()->download(public_path("/app/Foody.apk"));
-});
+Route::get('/download', [ReleaseController::class, 'download'])->name('download');
