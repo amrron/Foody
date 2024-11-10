@@ -14,28 +14,49 @@
             <path d="M 300.155 85.527 L 296.853 89.588" stroke="#131049" stroke-width="3.67321" stroke-linecap="round" style="" transform="matrix(1, 0, 0, 1, 7.105427357601002e-15, 0)"></path>
             <path d="M 291.384 83.63 L 291.732 88.85" stroke="#131049" stroke-width="3.67321" stroke-linecap="round" style="" transform="matrix(1, 0, 0, 1, 7.105427357601002e-15, 0)"></path>
           </svg>
-    </a>
-    <button data-collapse-toggle="navbar-solid-bg" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100" aria-controls="navbar-solid-bg" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
-    </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
-        <ul class="flex flex-col font-medium mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
-        <li>
-            <a href="/" class="block py-2 px-3 md:p-0 text-[#6B7280] rounded md:bg-transparent md:text-blue-700t" aria-current="page">Home</a>
-        </li>
-        <li>
-            <a href="#catatanku" class="block py-2 px-3 md:p-0 text-[#6B7280] rounded md:bg-transparent md:text-blue-700t">Catatanku</a>
-        </li>
-        <li>
-            <a href="#bmi" class="block py-2 px-3 md:p-0 text-[#6B7280] rounded md:bg-transparent md:text-blue-700t">BMI</a>
-        </li>
-        <li>
-            <a href="#makanan" class="block py-2 px-3 md:p-0 text-[#6B7280] rounded md:bg-transparent md:text-blue-700t">Makanan</a>
-        </li>
-        </ul>
-    </div>
+        </a>
+        <div class="flex-grow hidden md:flex justify-end">
+            
+        </div>
+        <div class="">
+            <a href="/download" class="md:hidden inline-flex text-birumuda bg-biru hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center me-2 gap-2">
+                <svg class="w-6 h-6 text-birumuda dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clip-rule="evenodd"/>
+                </svg>
+                Download
+            </a>
+            <button data-collapse-toggle="navbar-solid-bg" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100" aria-controls="navbar-solid-bg" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+            </button>
+        </div>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
+            <ul class="flex flex-col font-medium mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
+            <li class="flex items-center">
+                <a href="/" class="block py-2 px-3 md:p-0 text-[#6B7280] rounded md:bg-transparent md:text-blue-700t" aria-current="page">Home</a>
+            </li>
+            <li class="flex items-center">
+                <a href="#catatanku" class="block py-2 px-3 md:p-0 text-[#6B7280] rounded md:bg-transparent md:text-blue-700t">Catatanku</a>
+            </li>
+            <li class="flex items-center">
+                <a href="#bmi" class="block py-2 px-3 md:p-0 text-[#6B7280] rounded md:bg-transparent md:text-blue-700t">BMI</a>
+            </li>
+            <li class="flex items-center">
+                <a href="#makanan" class="block py-2 px-3 md:p-0 text-[#6B7280] rounded md:bg-transparent md:text-blue-700t">Makanan</a>
+            </li>
+            <li class="flex items-center">
+                <a href="/download" class="text-birumuda bg-biru hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 gap-2">
+                <svg class="w-6 h-6 text-birumuda dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clip-rule="evenodd"/>
+                </svg>
+                Download
+            </a>
+            </li>
+            </ul>
+        </div>
     </div>
 </nav>  
