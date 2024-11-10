@@ -56,7 +56,7 @@
                                         </th>
                                         <th scope="col"
                                             class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                            Tanggal Bergabung
+                                            Waktu Bergabung
                                         </th>
                                         <th scope="col"
                                             class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
@@ -80,9 +80,7 @@
                                     @foreach ($users as $user)                              
                                     <tr class="hover:bg-gray-100 ">
                                         <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-                                            <img class="w-10 h-10 rounded-full"
-                                                src="{{ $user->gambar ?? "https://flowbite.com/docs/images/people/profile-picture-5.jpg" }}"
-                                                alt="avatar">
+                                            <img class="w-10 h-10 rounded-full" src="{{ $user->gambar ? asset('storage/' . $user->gambar) : "https://flowbite.com/docs/images/people/profile-picture-5.jpg" }}"
                                             <div class="text-sm font-normal text-gray-500 ">
                                                 <div class="text-base font-semibold text-gray-900 ">{{ $user->name }}</div>
                                                 <div class="text-sm font-normal text-gray-500 ">{{ $user->email }}
@@ -91,7 +89,7 @@
                                         </td>
                                         <td
                                             class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs ">
-                                            {{ $user->created_at->format('d F Y') }}
+                                            {{ $user->created_at }}
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
                                             @if ($user->email_verified_at)

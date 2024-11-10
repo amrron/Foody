@@ -143,7 +143,7 @@
                     </a>
                 </li> --}}
                 <li>
-                    <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg ">
+                    <a href="/admin" class="flex items-center p-2 text-gray-900 rounded-lg ">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 " aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                             <path
