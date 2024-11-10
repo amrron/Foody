@@ -13,7 +13,7 @@ use App\Http\Controllers\MidtransNotificationController;
 
 Route::prefix('v1')->group(function(){
     // Route untuk user yang sudah login dan email terverifikasi
-    Route::middleware(['auth:sanctum', 'email_verified'])->group(function(){
+    Route::middleware(['auth:sanctum'])->group(function(){
         Route::controller(UserController::class)->group(function(){
             Route::put('/user', 'update');
             Route::put('/user/password', 'resetPassword');
