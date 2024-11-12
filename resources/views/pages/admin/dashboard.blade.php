@@ -52,6 +52,10 @@
                                     <tr>
                                         <th scope="col"
                                             class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
+                                            No
+                                        </th>
+                                        <th scope="col"
+                                            class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                             Name
                                         </th>
                                         <th scope="col"
@@ -77,8 +81,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 ">          
-                                    @foreach ($users as $user)                              
+                                    @foreach ($users as $user)   
+                                                         
                                     <tr class="hover:bg-gray-100 ">
+                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+                                            {{ $loop->iteration }}
+                                        </td>
                                         <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
                                             <img class="w-10 h-10 rounded-full" src="{{ $user->gambar ? asset('storage/' . $user->gambar) : "https://flowbite.com/docs/images/people/profile-picture-5.jpg" }}"
                                             <div class="text-sm font-normal text-gray-500 ">
@@ -162,8 +170,8 @@
                         </svg>
                     </a>
                     <span class="text-sm font-normal text-gray-500 ">Showing <span
-                            class="font-semibold text-gray-900 ">1-20</span> of <span
-                            class="font-semibold text-gray-900 ">2290</span></span>
+                            class="font-semibold text-gray-900 ">1-{{ $users->count() }}</span> of <span
+                            class="font-semibold text-gray-900 ">{{ $users->count() }}</span></span>
                 </div>
                 <div class="flex items-center space-x-3">
                     <a href="#"
