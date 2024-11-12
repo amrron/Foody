@@ -10,16 +10,16 @@ $(document).ready(function() {
         if (bmi < 19) {
             kategori = "Berat badan kurang"
         }
-        if (bmi < 25) {
+        else if (bmi < 25) {
             kategori = "Berat badan Normal"
         }
-        if (bmi < 30) {
+        else if (bmi < 30) {
             kategori = "Kelebihan berat badan"
         }
-        if (bmi < 35) {
+        else if (bmi < 35) {
             kategori = "Obesitas tingkat 1"
         }
-        if (bmi < 35) {
+        else if (bmi < 35) {
             kategori = "Obesitas tingkat 2"
         }
         else {
